@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="inline-flex pt-2">
+            <h1>User Permissions:</h1>
+            <a href="{{ path('app_new_permission') }}" class="btn-primary">Add New User Permission</a>
+        </div>
+        <table >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Email</th>
+                <th>Application</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-slate-800">
+            {% for permission in permissions %}
+            <tr>
+                <td>{{ permission.id }}</td>
+                <td>{{ permission.user }}</td>
+                <td>{{ permission.email }}</td>
+                <td>{{ permission.appName }}</td>
+                <td>{{ permission.roleName }}</td>
+            <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('app_admin') }}">Back</a>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="inline-flex w-full justify-between">
+            <h1 class="text-primary">Hello {{ userEmail }}! </h1>
+            <a  href="{{ path('app_logout') }}" class="btn-primary">Logout</a>
+        </div>
+        <div class="inline-flex pt-2">
+            <a href="{{ path('app_applications') }}" class="btn-primary">Browse Applications</a>
+            <a href="{{ path('app_users') }}" class="btn-primary">Manage Application Users</a>
+            <a href="{{ path('app_permissions') }}" class="btn-primary">Manage User Permissions</a>
+{#            <a href="{{ path('app_config') }}" class="btn-primary">Config</a>#}
+        </div>
+    </div>
+{% endblock %}

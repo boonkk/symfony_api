@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="inline-flex pt-2">
+            <h1>Your Applications:</h1>
+            <a href="{{ path('app_new_app') }}" class="btn-primary">Add New App</a>
+        </div>
+        <table >
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-slate-800">
+            {% for app in applications %}
+                <tr>
+                    <td>{{ app.name }}</td>
+                    <td>{{ app.description }}</td>
+                    <td>{{ app.roleName }}</td>
+                <tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('app_profile') }}">Back</a>
+
+    </div>
+
+{% endblock %}

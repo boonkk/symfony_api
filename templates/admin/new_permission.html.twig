@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add New Application{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>Add New Permission</h1>
+        <div>
+            {{ form_start(addPermissionForm) }}
+            {{ form_row(addPermissionForm.user) }}
+            {{ form_row(addPermissionForm.application) }}
+            {{ form_row(addPermissionForm.role) }}
+
+            <button type="submit">Add Application</button>
+            {{ form_end(addPermissionForm) }}
+
+            <a href="{{ path('app_permissions') }}">Back</a>
+        </div>
+    </div>
+{% endblock %}
