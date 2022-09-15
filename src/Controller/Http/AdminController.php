@@ -20,7 +20,7 @@ class AdminController extends AbstractController
     #[Route('', name: 'app_admin')]
     public function index(): Response
     {
-        $email = $this->getUser()->getEmail();
+        $email = $this->getUser()?->getEmail();
         return $this->render('admin/index.html.twig', [
             'userEmail' => $email,
         ]);

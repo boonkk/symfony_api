@@ -20,12 +20,12 @@ class ProfileController extends AbstractController
     #[Route('', name: 'app_profile')]
     public function index(): Response
     {
-        if(in_array('ROLE_ADMIN', $this->getUser()->getRoles()))
+        if(in_array('ROLE_ADMIN', $this->getUser()?->getRoles()))
         {
             return $this->redirectToRoute('app_admin');
         }
         return $this->render('profile/index.html.twig', [
-            'userEmail' => $this->getUser()->getEmail(),
+            'userEmail' => $this->getUser()?->getEmail(),
         ]);
     }
 
@@ -33,7 +33,7 @@ class ProfileController extends AbstractController
     public function application(EntityManagerInterface $entityManager): Response
     {
         $appUser = $entityManager->getRepository(AppUser::class)->findOneBy([
-            'email' => $this->getUser()->getEmail(),
+            'email' => $this->getUser()?->getEmail(),
         ]);
         $apps = [];
         if($appUser)
@@ -58,14 +58,14 @@ class ProfileController extends AbstractController
             $entityManager->flush();
 
             $appUser = $entityManager->getRepository(AppUser::class)->findOneBy([
-                'email' => $this->getUser()->getEmail(),
+                'email' => $this->getUser()?->getEmail(),
 
             ]);
             if($appUser === null)
             {
                 $appUser = new AppUser();
-                $appUser->setEmail($this->getUser()->getEmail());
-                $appUser->setUsername($this->getUser()->getEmail());
+                $appUser->setEmail($this->getUser()?->getEmail());
+                $appUser->setUsername($this->getUser()?->getEmail());
                 $entityManager->persist($appUser);
                 $entityManager->flush();
             }

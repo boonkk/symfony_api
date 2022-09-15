@@ -63,4 +63,13 @@ class ApplicationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllArray(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.id', 'a.name', 'a.description')
+            ->getQuery()
+            ->getResult();
+
+    }
 }

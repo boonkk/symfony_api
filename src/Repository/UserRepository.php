@@ -19,9 +19,12 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private ApiTokenRepository $apiTokenRepository;
+
+    public function __construct(ManagerRegistry $registry, ApiTokenRepository $apiTokenRepository)
     {
         parent::__construct($registry, User::class);
+        $this->apiTokenRepository = $apiTokenRepository;
     }
 
     public function add(User $entity, bool $flush = false): void
@@ -54,6 +57,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
 
         $this->add($user, true);
+    }
+
+    public function findByApiToken(string $apiToken): ?User
+    {
+        return $this->apiTokenRepository->findOneBy(['token' => $apiToken])?->getUser();
     }
 
 }
